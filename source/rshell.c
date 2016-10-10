@@ -33,14 +33,19 @@ int main(int argc, char * argv[]){
     command = cmd;
     parsed = parseCmd(command);
 
+    strtok(parsed[0],"\n");
     if(strcmp("cd",parsed[0]) == 0){
       strtok(parsed[1], "\n");
       if(chdir(parsed[1]) != 0){
-        perror("shiieeet");
+        perror("Error changing directories");
       }
     }
  
-    //if(strcmp("
+    if(strcmp("exit",parsed[0]) == 0){
+      exit(0);
+    }
+
+     
 
     //TODO: fork/exec command and args in another function
 
