@@ -37,7 +37,6 @@ int main(int argc, char * argv[]){
     command = cmd;
     strtok(command, "\n");
     parsed = parseCmd(command);
-
     if(strcmp("cd",parsed[0]) == 0){
       strtok(parsed[1], "\n");
       if(chdir(parsed[1]) != 0){
@@ -70,9 +69,13 @@ char **cleanUp(char **parsed){
 }
 
 int execute(char **parsed){
+
+  if(strcmp("\n",parsed[0]) == 0)
+    return 1;
+
   int rc = fork();
-  int retval = 1;
- 
+  int retval = 1; 
+
   if(rc < 0){
     fprintf(stderr, "fork failed");
     exit(1);
